@@ -1,6 +1,6 @@
 <template>
   <base-title>Редактировать позицию</base-title>
-  <base-form v-on:submit.prevent="processInput">
+  <base-form v-on:submit.prevent="editPosition" mode="product">
     <img :src="'http://localhost:3000/' + oldImageUrl" :alt="id">
 
     <div class="flex">
@@ -54,7 +54,7 @@ export default {
     selectFile() {
       this.image = this.$refs.image.files[0];
     },
-    async processInput() {
+    async editPosition() {
       try {
         const formData = new FormData();
         formData.append("title", this.title);
@@ -66,7 +66,8 @@ export default {
 
         const configs = {
           headers: {
-            "Content-Type": "multipart/form-data"
+            "Content-Type": "multipart/form-data",
+            "Authorization": localStorage.getItem("token")
           }
         };
 
@@ -78,7 +79,9 @@ export default {
 
         this.$router.push("/");
       } catch(err) {
+        console.log("Caught!");
         console.log(err);
+        this.$router.push("/login");
       }
     }
   },

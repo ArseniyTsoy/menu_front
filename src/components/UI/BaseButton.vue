@@ -43,6 +43,11 @@ a {
   text-align: center;
 }
 
+button:hover,
+a:hover {
+  background-color: var(--black);
+}
+
 .edit-btn {
   width: 100%;
   background-color: var(--green);
@@ -54,14 +59,18 @@ a {
 }
 
 .header-btn {
+  width: 100%;
   background-color: var(--orange);
-  margin-top: 0;
-  margin-left: 2rem;
+  /* margin-top: 0;
+  margin-left: 2rem; */
 }
 
-button:hover,
-a:hover {
-  background-color: var(--black);
+.auth-btn {
+  width: 100%;
+  background-color: tomato;
+  /* text-align: center; */
+  /* max-width: 50%; */
+  /* margin-bottom: 1.5rem; */
 }
 
 </style>

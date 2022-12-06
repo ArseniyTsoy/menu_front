@@ -1,6 +1,6 @@
 <template>
   <base-title>Добавление новой позиции</base-title>
-  <base-form v-on:submit.prevent="processInput">
+  <base-form v-on:submit.prevent="createPosition" mode="product">
     <div class="flex">
       <side-block>
         <input class="box" type="text" name="title" placeholder="Наименование позиции" v-model="title" required>
@@ -46,7 +46,7 @@ export default {
     selectFile() {
       this.image = this.$refs.image.files[0];
     },
-    async processInput() {
+    async createPosition() {
 
       const formData = new FormData();
       formData.append("title", this.title);
@@ -57,7 +57,8 @@ export default {
 
       const configs = {
         headers: {
-          "Content-Type": "multipart/form-data"
+          "Content-Type": "multipart/form-data",
+          "Authorization": localStorage.getItem("token")
         }
       };
 
@@ -70,7 +71,9 @@ export default {
         
         this.$router.push("/");
       } catch(err) {
+        console.log("Caught!");
         console.log(err);
+        this.$router.push("/login")
       }
     }
   },

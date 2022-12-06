@@ -27,6 +27,7 @@ export default {
   --white: #fff;
   --light-bg: #f6f6f6;
   --border: .2rem solid var(--black);
+  --border-auth: .2rem solid #ffffffb3;
   --box-shadow: 0 .5rem 1rem rgba(0,0,0,.1);
 }
 

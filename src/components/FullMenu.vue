@@ -35,22 +35,34 @@ export default {
   methods: {
     async deletePosition(id) {
       try {
-        await axios.delete(`http://localhost:3000/delete-position/${id}`);
+        await axios.delete(
+          `http://localhost:3000/delete-position/${id}`, 
+          { 
+            headers: { 
+              "Authorization": localStorage.getItem("token") 
+            }
+          }
+        );
 
         this.$router.go();
       } catch(err) {
         console.log(err);
+        this.$router.push("/login");
       }
     }
   },
   async mounted() {
-    const { data } = await axios.get("http://localhost:3000");
+    try {
+      const { data } = await axios.get("http://localhost:3000");
 
-    this.$store.dispatch("setPositions", data.positions);
-    this.$store.dispatch("setCategories", data.categories);
-    
-    this.positions = data.positions;
-    this.categories = data.categories;
+      await this.$store.dispatch("setPositions", data.positions);
+      await this.$store.dispatch("setCategories", data.categories);
+
+      this.positions = data.positions;
+      this.categories = data.categories;
+    } catch(err) {
+      console.log(err);
+    }
   }
 }
 </script>
